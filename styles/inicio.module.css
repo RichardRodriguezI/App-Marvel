@@ -1,0 +1,45 @@
+.inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 18rem ;
+}
+
+.inicio h1 {
+    color: var(--white);
+    font-weight: 700;
+}
+.inicio form {
+      color: var(--white);
+      font-weight: 400;
+}
+.inicio label {
+    color: var(--white);
+    text-align: left;
+}
+.inicio input[type="text"] {
+    display: block;
+    margin: 2rem 0 ;
+    padding: 1.4rem;
+    width: 32rem;
+    border: none;
+    outline: none;
+    background-color: var(--black);
+    color: var(--white);
+}
+.inicio input[type="text"]::placeholder {
+    color: var(--white);
+}
+.inicio input[type="submit"] {
+    padding: 1.2rem;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 4rem;
+}
+.inicio input[type="submit"]:hover {
+    background-color: var(--secundary);
+    cursor: pointer;
+    color: var(--white);
+}
