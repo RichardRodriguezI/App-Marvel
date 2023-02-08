@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Finished } from "../context/finished";
 import { useContext } from "react";
 
-export default function Preguntas({ data, value}) {
+export default function Preguntas({ value, data}) {
     const { finished, setFinished} = useContext(Finished)
     const [objetoActual, setObjetoActual] = useState(0)
     const [puntuacion, setPuntuacion] = useState(0)
@@ -21,7 +21,7 @@ export default function Preguntas({ data, value}) {
 
     let iteracion = data.results.data.results
     const router = useRouter()
-    console.log(iteracion)
+
     const handleClick = opcion => {
         if(opcion.isCorrect === true) {
           setPuntuacion(puntuacion + 1)
@@ -38,7 +38,9 @@ export default function Preguntas({ data, value}) {
       setModal(false)
       if(objetoActual === preguntas.length - 1) {
         setObjetoActual(0)
-        setFinished(false)
+        setFinished(false) 
+        setPuntuacion(puntuacion)
+        setModal(false)
       }  else {
         setObjetoActual(objetoActual + 1)
       }
@@ -55,20 +57,32 @@ export default function Preguntas({ data, value}) {
           clearInterval(interval)
           setDisabled(true)
           setObjetoActual( objetoActual + 1)
-           setPuntuacion(puntuacion > 0 ? puntuacion - 1 : null)
+          setPuntuacion(puntuacion > 0 ? puntuacion - 1 : 0)
+          setModal(true)
+          setBolean(false)
+          setModal(false)
+        if(objetoActual === preguntas.length - 1) {
+        setObjetoActual(0)
+        setFinished(false)
+      }  else {
+        setObjetoActual(objetoActual + 1)
       }
+
+        } 
       }, 1000)
        setDisabled(false) 
+       setPuntuacion(puntuacion)
     }
     start()
     return() => {
         clearInterval(interval)
     }
-  }, [objetoActual, time, disabled, puntuacion])
+  }, [objetoActual, time, disabled, puntuacion, modal, boolean, setFinished])
     
   useEffect(() => {
     setTime(10);
   }, [objetoActual]);
+  
   return (
                  <>            
                     { modal ? (
@@ -76,8 +90,8 @@ export default function Preguntas({ data, value}) {
                         boolean={boolean}
                         puntuacion={puntuacion}
                         />
-                    ) : (
-                         <>
+                    ) : finished ? (
+                                               <>
                         <div className={styles.header}>
                         <Link href="/"> <Image src='/img/logo.png' alt='logo' width={400} height={300}  /></Link>
                         <div className={styles.user}>
@@ -89,22 +103,20 @@ export default function Preguntas({ data, value}) {
                         <p>Puntuacion: {puntuacion}</p>  
                         <h2>Pregunta: ¿What character is it?</h2>
                         <span>{time}</span>
-                        {finished ? <>
+
+                      
                           {
                         iteracion.slice(objetoActual, objetoActual + 1).map((objeto, index) => {
-                      if(index > 10 ) {
-                          return null;
-                           } else {
-                            if(objeto.thumbnail.path !== "40/image_not_available"){
-                              return (
-                                  <div key={index} className={styles.img}>
-                                      <LazyLoadImage src={`${objeto.thumbnail.path}.${objeto.thumbnail.extension}`} alt={objeto.name} width={400} height={400}/>
-                                  </div>
+                      if(index > 10 && objeto.thumbnail.path === "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available" ) {
+                          objetoActual + 1 
+                          // return showImages(iteracion, objetoActual);
+                           } else {    
+                            return (
+                                <div key={index} className={styles.img}>
+                                <LazyLoadImage src={`${objeto.thumbnail.path}.${objeto.thumbnail.extension}`} alt={objeto.name} width={400} height={400}/>
+                                </div>
                               )
-                          }else {
-                             objetoActual + 1
-                          }
-                           }        
+                           }          
                         })}
                           {preguntas.slice(objetoActual, objetoActual + 1).map((pregunta, index) => (
                             <div className={styles.preguntas} key={index}>
@@ -115,15 +127,17 @@ export default function Preguntas({ data, value}) {
                                 ))}
                             </div>
                           ))}    
-                        </> : setFinished(false)}
-                         </>
-                    )}
+                        </>
+                    ) : (
+                      <h2>Juego terminado</h2>
+                    )
+                    }
     </>
   )
 }
 export async function getServerSideProps(context) {
     // Recuperamos el state de la query
-    const { value } = context.query;
+    const { value  } = context.query;
   
     let data = {};
     try {

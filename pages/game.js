@@ -8,11 +8,12 @@ import { Finished } from "../context/finished";
 import { useContext } from "react";
 
 
-function Game() {
+function Game({value}) {
   const { finished, setFinished} = useContext(Finished)
   const [start, setStart] = useState(true)
   const [tiempo, setTiempo] = useState(5)
   const router = useRouter()
+
   useEffect(() => {
     let interval = null;
     const startTimer = () => {
@@ -25,6 +26,7 @@ function Game() {
                 clearInterval(interval)
                 router.push({
                   pathname: '/preguntas',
+                  query: { value }
                })
               }
         }, 500);
@@ -34,12 +36,13 @@ function Game() {
     return () => {
       clearInterval(interval);
     }
-  }, [start, tiempo, router]);
+  }, [start, tiempo, router, value]);
 
 const boton = () => {
    setStart(false)
    router.push({
     pathname: '/preguntas',
+    query: { value }
  })
 }
 
@@ -75,3 +78,14 @@ const boton = () => {
   );
 }
 export default Game;
+
+export async function getServerSideProps(context) {
+  // Recuperamos el state de la query
+  const { value } = context.query;
+
+  return {
+    props: {
+      value
+    }
+  }
+}
