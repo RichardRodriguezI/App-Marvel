@@ -1,17 +1,15 @@
-// import Preguntas from '../componets/preguntas';
+import styles from '../styles/game.module.css'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import styles from '../styles/game.module.css'
-// import Header from '../components/Header';
-import Link from 'next/link';
 import { Finished } from "../context/finished";
 import { useContext } from "react";
-
+import Start from '../components/start';
+import Terminado from '../components/terminado';
 
 function Game({value}) {
   const { finished, setFinished} = useContext(Finished)
   const [start, setStart] = useState(true)
-  const [tiempo, setTiempo] = useState(5)
+  const [tiempo, setTiempo] = useState(10)
   const router = useRouter()
 
   useEffect(() => {
@@ -29,7 +27,7 @@ function Game({value}) {
                   query: { value }
                })
               }
-        }, 500);
+        }, 1000);
       }      
     };
     startTimer();
@@ -51,25 +49,15 @@ const boton = () => {
         <main>
            <div className={`contenedor ${styles.game}`}>
            {finished ? (
-             <>
-             <div className={styles.contenido}>         
-                   <>
-                     {start ? (
-                          <div className={styles.start}>
-                         <h1>Game Starts in: {tiempo}</h1>
-                          <button onClick={() => boton()}>Comenzar Ya!</button>
-                          </div>
-                        ) : null} 
-                   </>
-              </div> 
-             </>
+             <Start boton={boton} start={start} tiempo={tiempo}/>
                     ): (
-                      <div>
-                        <h2>Puntuacion Final: {puntuacion}</h2>
-                       <button>Ver Tu Puntuacion</button>
-                       <button onClick={() => btn()}>Volver a jugar!</button>
-                       <Link href="/">Ir al Menu</Link>
-                      </div>
+                      <Terminado />
+                      // <div>
+                      //   <h2>Puntuacion Final: {puntuacion}</h2>
+                      //  <button>Ver Tu Puntuacion</button>
+                      //  <button onClick={() => btn()}>Volver a jugar!</button>
+                      //  <Link href="/">Ir al Menu</Link>
+                      // </div>
                     )}         
               
            </div>

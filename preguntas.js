@@ -25,9 +25,9 @@
       },
       {
         opciones: [
-            { respuesta: "Iron Man", isCorrect: true},
-            { respuesta: "Galactus", isCorrect: false},
-            { respuesta: "Baymax", isCorrect: false},
+            { respuesta: "A.I.M", isCorrect: true},
+            { respuesta: "Bast", isCorrect: false},
+            { respuesta: "Witch", isCorrect: false},
             { respuesta: "Cain", isCorrect: false},
         ]
       },
@@ -41,9 +41,9 @@
       },
       {
         opciones: [
-            { respuesta: "Carnage", isCorrect: true},
-            { respuesta: "Galactus", isCorrect: false},
-            { respuesta: "Baymax", isCorrect: false},
+            { respuesta: "Carnage", isCorrect: false},
+            { respuesta: "Absorbing Man", isCorrect: true},
+            { respuesta: "Captain America", isCorrect: false},
             { respuesta: "Cain", isCorrect: false},
         ]
       },
@@ -58,8 +58,8 @@
       {
         opciones: [
             { respuesta: "Black Widow", isCorrect: false},
-            { respuesta: "Abyss", isCorrect: true},
             { respuesta: "Elektra", isCorrect: false},
+            { respuesta: "Abyss", isCorrect: true},
             { respuesta: "Dora", isCorrect: false},
         ]
       },
@@ -73,10 +73,50 @@
       },
       {
         opciones: [
-            { respuesta: "Iron Man", isCorrect: true},
-            { respuesta: "Galactus", isCorrect: false},
+          { respuesta: "Black Widow", isCorrect: false},
+          { respuesta: "Abyss(Age of Apocalypse", isCorrect: true},
+          { respuesta: "Elektra", isCorrect: false},
+          { respuesta: "Elizabeth Allan", isCorrect: false},
+        ]
+      },
+      {
+        opciones: [
+          { respuesta: "Adam Warlock", isCorrect: true},
+          { respuesta: "Iron Man", isCorrect: false},
             { respuesta: "Baymax", isCorrect: false},
             { respuesta: "Cain", isCorrect: false},
+        ]
+      },
+      {
+        opciones: [
+          { respuesta: "Galactus", isCorrect: false},
+          { respuesta: "Baymax", isCorrect: false},
+          { respuesta: "Aegis (Trey Rollins)", isCorrect: true},
+          { respuesta: "Cain", isCorrect: false},
+        ]
+      },
+      {
+        opciones: [
+          { respuesta: "Galactus", isCorrect: false},
+          { respuesta: "Baymax", isCorrect: false},
+          { respuesta: "Aegis (Trey Rollins)", isCorrect: true},
+          { respuesta: "Cain", isCorrect: false},
+        ]
+      },
+      {
+        opciones: [
+          { respuesta: "Galactus", isCorrect: false},
+          { respuesta: "Baymax", isCorrect: false},
+          { respuesta: "Cain", isCorrect: false},
+          { respuesta: "Agatha Harkness", isCorrect: true}, 
+        ]
+      },
+      {
+        opciones: [
+          { respuesta: "Galactus", isCorrect: false},
+          { respuesta: "Baymax", isCorrect: false},
+          { respuesta: "Cain", isCorrect: false},
+          { respuesta: "Agatha Harkness", isCorrect: true}, 
         ]
       },
   ]
